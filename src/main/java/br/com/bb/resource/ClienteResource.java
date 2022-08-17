@@ -1,8 +1,9 @@
 package br.com.bb.resource;
 
 import br.com.bb.dto.ClienteDTO;
-import br.com.bb.dto.ClienteMapper;
+import br.com.bb.mapper.ClienteMapper;
 import br.com.bb.model.Cliente;
+import br.com.bb.service.ClienteService;
 
 import javax.inject.Inject;
 import javax.transaction.Transactional;
@@ -17,10 +18,16 @@ public class ClienteResource {
     @Inject
     public ClienteMapper clienteMapper;
 
+    private ClienteService clienteService;
+    public ClienteResource(ClienteService clienteService){
+        this.clienteService = clienteService;
+
+    }
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<ClienteDTO> list() {
-        return clienteMapper.toDomainList(Cliente.listAll());
+        return clienteService.findComCategorias();
     }
 
     @POST

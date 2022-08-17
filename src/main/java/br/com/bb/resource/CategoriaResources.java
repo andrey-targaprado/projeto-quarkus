@@ -1,7 +1,7 @@
 package br.com.bb.resource;
 
 import br.com.bb.dto.CategoriaDTO;
-import br.com.bb.dto.CategoriaMapper;
+import br.com.bb.mapper.CategoriaMapper;
 import br.com.bb.model.Categoria;
 
 import javax.inject.Inject;
