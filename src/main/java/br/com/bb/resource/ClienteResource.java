@@ -1,7 +1,10 @@
 package br.com.bb.resource;
 
+import br.com.bb.dto.ClienteDTO;
+import br.com.bb.dto.ClienteMapper;
 import br.com.bb.model.Cliente;
 
+import javax.inject.Inject;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 import javax.ws.rs.*;
@@ -11,6 +14,8 @@ import java.util.List;
 @Path("/cliente")
 public class ClienteResource {
 
+    @Inject
+    public ClienteMapper clienteMapper;
     /*
     @GET
     @Path("/{category}")
@@ -33,9 +38,9 @@ public class ClienteResource {
     @Consumes(value = MediaType.APPLICATION_JSON)
     @Produces(value = MediaType.APPLICATION_JSON)
     @Transactional
-    public Cliente create(@Valid Cliente cliente){
+    public ClienteDTO create(@Valid Cliente cliente){
         cliente.persist();
-        return cliente;
+        return clienteMapper.toDomain(cliente);
 
     }
 }
