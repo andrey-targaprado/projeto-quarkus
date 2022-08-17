@@ -16,23 +16,34 @@ public class ClienteResource {
 
     @Inject
     public ClienteMapper clienteMapper;
-    /*
-    @GET
-    @Path("/{category}")
-    @Produces(MediaType.TEXT_PLAIN)
-    public String user(
-            @PathParam("category") String category,
-            @QueryParam("tipo") String tipo
-    ) {
-
-        return "Ola " + category + tipo;
-    }
-    */
 
     @GET
-    public List<Cliente> list() {
-        return Cliente.listAll();
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<ClienteDTO> list() {
+        return clienteMapper.toDomainList(Cliente.listAll());
     }
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Transactional
+    public ClienteDTO create(@Valid ClienteDTO clienteDTO) {
+        Cliente cliente = clienteMapper.toEntity(clienteDTO);
+        cliente.persist();
+        return clienteMapper.toDomain(cliente);
+    }
+
+    @POST
+    @Path("/sem-dto")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Transactional
+    public Cliente createSemDTO(Cliente cliente) {
+        cliente.categoria.persist();
+        cliente.persist();
+        return cliente;
+    }
+
 
     @POST
     @Consumes(value = MediaType.APPLICATION_JSON)

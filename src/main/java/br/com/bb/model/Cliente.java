@@ -3,6 +3,7 @@ package br.com.bb.model;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.*;
 
 @Entity
@@ -21,5 +22,6 @@ public class Cliente extends PanacheEntity {
     @Email(message = "Deve registrar um email valido")
     public String email;
 
-    //public Categoria categoria;
+    @ManyToOne
+    public Categoria categoria;
 }

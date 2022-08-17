@@ -2,13 +2,8 @@ package br.com.bb.dto;
 
 public class ClienteDTO {
 
-    private String nome;
+    public String nome;
 
-    public String getNome() {
-        return nome;
-    }
+    public CategoriaDTO categoria;
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
 }
